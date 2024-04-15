@@ -15,7 +15,7 @@ public class AssetService {
     @Autowired
     AssetRepository assetRepository;
 
-    public GetAllAssetsResponse getAllAssests(){
+    public GetAllAssetsResponse getAllAssets(){
         final var assests=assetRepository.findAll();
 
         GetAllAssetsResponse response=new GetAllAssetsResponse();
@@ -38,7 +38,7 @@ public class AssetService {
 
     public BigDecimal getValueOfAssets(){
 
-        return assetRepository.valueOfAllAssests();
+        return assetRepository.valueOfAllAssets();
     }
 
     public void save(AssetSummary request) {

@@ -35,7 +35,7 @@ public interface AssetRepository extends CrudRepository<Asset,Long>, JpaSpecific
         return (sum);
     }
 
-    default BigDecimal valueOfAllAssests(){
+    default BigDecimal valueOfAllAssets(){
         final Iterable<Asset> ids=findAll();
         BigDecimal sum = BigDecimal.valueOf(0);
 
