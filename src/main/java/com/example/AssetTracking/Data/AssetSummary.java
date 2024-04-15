@@ -3,6 +3,9 @@ package com.example.AssetTracking.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Create a summary for asset management.
+ */
 public class AssetSummary {
     private final BigDecimal cost;
 
@@ -12,7 +15,10 @@ public class AssetSummary {
 
     private final String title;
 
-    public AssetSummary(BigDecimal cost, BigDecimal depreciationRate, LocalDate purchaseDate, String title) {
+    public AssetSummary(BigDecimal cost
+            , BigDecimal depreciationRate
+            , LocalDate purchaseDate
+            , String title) {
         this.cost = cost;
         this.depreciationRate = depreciationRate;
         this.purchaseDate = purchaseDate;

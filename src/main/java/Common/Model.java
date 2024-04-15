@@ -1,6 +1,8 @@
 package Common;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,7 +14,12 @@ public abstract class Model implements Serializable {
     private static final long serialVersionUID = 0L;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
+    @Generated(GenerationTime.INSERT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public Long getId(){
+        return id;
+    }
 }

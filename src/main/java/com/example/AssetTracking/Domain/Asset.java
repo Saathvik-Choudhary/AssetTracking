@@ -9,6 +9,9 @@ import java.io.Serial;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Create an entity for asset management.
+ */
 @Entity
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "asset")
@@ -37,29 +40,63 @@ public class Asset extends Model {
     @Size(min = 3,max = 100)
     private String title;
 
+    /**
+     * Hidden to prevent instantiation.
+     */
     public Asset(){
         super();
     }
 
-    public Asset(BigDecimal cost, BigDecimal depreciationRate, LocalDate purchaseDate, String title) {
+    /**
+     * Create an asset having specific attributes.
+     *
+     * @param cost The cost of the asset.
+     * @param depreciationRate The depreciation Rate of the asset.
+     * @param purchaseDate The purchase date of the asset.
+     * @param title The title of the asset.
+     */
+    public Asset(BigDecimal cost
+            , BigDecimal depreciationRate
+            , LocalDate purchaseDate
+            , String title) {
         setCost(cost);
         setDepreciationRate(depreciationRate);
         setPurchaseDate(purchaseDate);
         setTitle(title);
     }
 
+    /**
+     * Get the cost of the asset.
+     *
+     * @return the cost of the asset.
+     */
     public BigDecimal getCost() {
         return cost;
     }
 
+    /**
+     * Get the depreciation rate of the asset.
+     *
+     * @return the depreciation rate of the asset.
+     */
     public BigDecimal getDepreciationRate() {
         return depreciationRate;
     }
 
+    /**
+     * Get the purchase date of the asset.
+     *
+     * @return The purchase date of the asset.
+     */
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
+    /**
+     * Get the title of the asset.
+     *
+     * @return the title of the asset
+     */
     public String getTitle() {
         return title;
     }
