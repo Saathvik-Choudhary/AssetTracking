@@ -24,6 +24,11 @@ public class AssetService {
         return response;
     }
 
+
+    public int GetAssetCount()
+    {
+        Long a =assetRepository.size();
+    }
     /*
     public AssetSummary summaryContainer(){
 
