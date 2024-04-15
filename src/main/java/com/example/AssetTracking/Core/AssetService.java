@@ -6,28 +6,37 @@ import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class AssetService {
 
     @Autowired
     AssetRepository assetRepository;
 
-    public GetAllAssetsResponse getAllAssets() {
-        final var assets = assetRepository.findAll();
+    public GetAllAssetsResponse getAllAssests(){
+        final var assests=assetRepository.findAll();
 
-        GetAllAssetsResponse response = new GetAllAssetsResponse();
+        GetAllAssetsResponse response=new GetAllAssetsResponse();
 
-        for (var asset : assets) {
-            response.addAsset(new AssetSummary(asset.getCost(), asset.getDepreciationRate(), asset.getPurchaseDate(), asset.getTitle()));
+        for(var asset:assests){
+            response.addAsset(new AssetSummary( asset.getCost(),asset.getDepreciationRate(),asset.getPurchaseDate(),asset.getTitle()));
         }
 
         return response;
     }
 
 
-    public long GetAssetCount() {
-        Long a = assetRepository.size();
-        return a;
+    public Long GetAssetCount() {
+        return assetRepository.size();
+    }
+
+    public BigDecimal getCostOfAllAssets(){
+        return assetRepository.costOfAllAssets();
+    }
+
+    public BigDecimal getValueOfAssets(){
+
+        return assetRepository.valueOfAllAssests();
     }
 }
-
