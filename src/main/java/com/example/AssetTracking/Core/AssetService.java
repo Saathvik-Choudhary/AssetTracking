@@ -12,27 +12,22 @@ public class AssetService {
     @Autowired
     AssetRepository assetRepository;
 
-    public GetAllAssetsResponse getAllAssests(){
-        final var assests=assetRepository.findAll();
+    public GetAllAssetsResponse getAllAssets() {
+        final var assets = assetRepository.findAll();
 
-        GetAllAssetsResponse response=new GetAllAssetsResponse();
+        GetAllAssetsResponse response = new GetAllAssetsResponse();
 
-        for(var asset:assests){
-            response.addAsset(new AssetSummary( asset.getCost(),asset.getDepreciationRate(),asset.getPurchaseDate(),asset.getTitle()));
+        for (var asset : assets) {
+            response.addAsset(new AssetSummary(asset.getCost(), asset.getDepreciationRate(), asset.getPurchaseDate(), asset.getTitle()));
         }
 
         return response;
     }
 
 
-    public int GetAssetCount()
-    {
-        Long a =assetRepository.size();
+    public long GetAssetCount() {
+        Long a = assetRepository.size();
+        return a;
     }
-    /*
-    public AssetSummary summaryContainer(){
-
-    }
-
-     */
 }
+

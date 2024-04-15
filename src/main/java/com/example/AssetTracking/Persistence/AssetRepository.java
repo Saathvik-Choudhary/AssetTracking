@@ -2,14 +2,12 @@ package com.example.AssetTracking.Persistence;
 
 import com.example.AssetTracking.Domain.Asset;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Collection;
 
 @Repository
 public interface AssetRepository extends CrudRepository<Asset,Long>, JpaSpecificationExecutor<Asset> {
@@ -35,7 +33,7 @@ public interface AssetRepository extends CrudRepository<Asset,Long>, JpaSpecific
         return (sum);
     }
 
-    default BigDecimal valueOfAllAssests(){
+    default BigDecimal valueOfAllAssets(){
         Iterable<Asset> ids=findAll();
         BigDecimal sum = BigDecimal.valueOf(0);
 

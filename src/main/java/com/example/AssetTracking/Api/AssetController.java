@@ -17,7 +17,7 @@ public class AssetController {
     AssetService assetService;
 
     @GetMapping("/all")
-    public ResponseEntity<GetAllAssetsResponse> finall(){
-        return ResponseEntity.ok(assetService.getAllAssests());
+    public ResponseEntity<GetAllAssetsResponse> findAll(){
+        return ResponseEntity.ok(assetService.getAllAssets());
     }
 }

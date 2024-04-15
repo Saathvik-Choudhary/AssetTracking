@@ -2,6 +2,9 @@ package Common;
 
 import org.springframework.util.StringUtils;
 
+/**
+ * Create a String Util class
+ */
 public final class StringUtil {
 
     private StringUtil()
