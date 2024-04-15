@@ -15,7 +15,6 @@ public abstract class Model implements Serializable {
 
     @Id
     @Column(name = "id", updatable = false)
-    @Generated(GenerationTime.INSERT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -2,6 +2,7 @@ package com.example.AssetTracking.Core;
 
 import com.example.AssetTracking.Data.AssetSummary;
 import com.example.AssetTracking.Data.GetAllAssetsResponse;
+import com.example.AssetTracking.Domain.Asset;
 import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,9 @@ public class AssetService {
     public BigDecimal getValueOfAssets(){
 
         return assetRepository.valueOfAllAssests();
+    }
+
+    public void save(AssetSummary request) {
+        assetRepository.save(new Asset(request.getCost(),request.getDepreciationRate(),request.getPurchaseDate(),request.getTitle()));
     }
 }

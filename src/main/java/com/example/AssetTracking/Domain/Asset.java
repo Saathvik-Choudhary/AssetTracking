@@ -59,6 +59,7 @@ public class Asset extends Model {
             , BigDecimal depreciationRate
             , LocalDate purchaseDate
             , String title) {
+        super();
         setCost(cost);
         setDepreciationRate(depreciationRate);
         setPurchaseDate(purchaseDate);
