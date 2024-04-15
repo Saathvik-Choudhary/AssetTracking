@@ -19,8 +19,8 @@ public class AssetController {
     AssetService assetService;
 
     @GetMapping("/all")
-    public ResponseEntity<GetAllAssetsResponse> findall(){
-        return ResponseEntity.ok(assetService.getAllAssests());
+    public ResponseEntity<GetAllAssetsResponse> findall() {
+        return ResponseEntity.ok(assetService.getAllAssets());
     }
 
     @PostMapping("/save")
