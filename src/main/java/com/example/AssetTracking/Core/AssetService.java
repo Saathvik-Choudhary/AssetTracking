@@ -6,6 +6,8 @@ import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class AssetService {
 
@@ -25,14 +27,16 @@ public class AssetService {
     }
 
 
-    public int GetAssetCount()
-    {
-        Long a =assetRepository.size();
-    }
-    /*
-    public AssetSummary summaryContainer(){
-
+    public Long GetAssetCount() {
+        return assetRepository.size();
     }
 
-     */
+    public BigDecimal getCostOfAllAssets(){
+        return assetRepository.costOfAllAssets();
+    }
+
+    public BigDecimal getValueOfAssets(){
+
+        return assetRepository.valueOfAllAssests();
+    }
 }
