@@ -26,18 +26,16 @@ public class AssetController {
         return ResponseEntity.ok(assetService.getAllAssets());
     }
 
-    @PutMapping("/save")
-    public void save(AssetSummary request){
+    @CrossOrigin
+    @PostMapping("/save")
+    public void save(@RequestBody AssetSummary request){
+        System.out.println("put was called");
         assetService.save(request);
     }
+    @CrossOrigin
     @GetMapping("/assetSummary")
-    public ResponseEntity<List<BigDecimal>> assetSummary(){
-        GetAllAssetSummaryResponse response=assetService.getAssetSummary();
-        List<BigDecimal> r=new ArrayList<>();
-        r.add(BigDecimal.valueOf(response.getCount()));
-        r.add(response.getValue());
-        r.add(response.getCost());
-        return ResponseEntity.ok(r);
+    public ResponseEntity<GetAllAssetSummaryResponse> assetSummary(){
+        return ResponseEntity.ok(assetService.getAssetSummary());
     }
 
 

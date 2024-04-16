@@ -19,7 +19,6 @@ import java.time.Period;
 @Repository
 public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecificationExecutor<Asset> {
 
-<<<<<<< HEAD
     /**
      * Calculate the size of asset collection.
      *
@@ -29,7 +28,10 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
         final Iterable<Asset> ids = findAll();
         Long sum = 0L;
         for (var id : ids) {
-=======
+            sum++;
+        }
+        return (sum);
+    }
     /*
     @Query(value = "FROM Asset ORDER BY purchase_date")
     public Collection<Asset> findAll();
@@ -57,22 +59,12 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
      */
 
 
-    default Long size(){
-        final Iterable<Asset> ids=findAll();
-        Long sum= 0L;
-        for(var id : ids)
-        {
->>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
-            sum++;
-        }
-        return (sum);
-    }
-
     /**
      * Calculate the total cost of all assets.
      *
      * @return The total cost of all assets.
      */
+
     default BigDecimal costOfAllAssets() {
         final Iterable<Asset> ids = findAll();
         BigDecimal sum = BigDecimal.valueOf(0);
@@ -82,7 +74,6 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
         return (sum);
     }
 
-<<<<<<< HEAD
     /**
      * Calculates the current value of all assets, considering depreciation.
      *
@@ -90,10 +81,6 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
      */
     default BigDecimal currentValueOfAllAssets() {
         final Iterable<Asset> ids = findAll();
-=======
-    default BigDecimal valueOfAllAssets(){
-        final Iterable<Asset> ids=findAll();
->>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
         BigDecimal sum = BigDecimal.valueOf(0);
         for (var id : ids) {
             sum = sum.add(depreciatedValue(id));

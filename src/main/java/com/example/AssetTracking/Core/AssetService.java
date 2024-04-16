@@ -19,50 +19,36 @@ public class AssetService {
     @Autowired
     AssetRepository assetRepository;
 
-<<<<<<< HEAD
     /**
      * Get all assets saved in the tracker.
      *
      * @return all the assets.
      */
-    public GetAllAssetsResponse getAllAssets() {
-        final var assets = assetRepository.findAll();
-=======
     public GetAllAssetsResponse getAllAssets(){
         final var assets=assetRepository.findAll();
->>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
 
         GetAllAssetsResponse response = new GetAllAssetsResponse();
 
-<<<<<<< HEAD
         for (var asset : assets) {
             response.addAsset(new AssetSummary(asset.getCost()
                     , asset.getDepreciationRate()
                     , asset.getPurchaseDate()
                     , asset.getTitle()));
-=======
-        for(var asset:assets){
-            response.addAsset(new AssetSummary( asset.getTitle(),asset.getCost(),asset.getPurchaseDate(),asset.getDepreciationRate()));
->>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
         }
 
         return response;
     }
 
     public GetAllAssetSummaryResponse getAssetSummary(){
-        return(new GetAllAssetSummaryResponse(getAssetCount(),getCostOfAllAssets(),getValueOfAssets()));
+        return(new GetAllAssetSummaryResponse(getAssetCount(),getCostOfAllAssets(),getCurrentValueOfAllAssets()));
     }
 
-<<<<<<< HEAD
     /**
      * Get the total number of assets saved in tracker.
      *
      * @return The count of tracker.
      */
-    public Long GetAssetCount() {
-=======
     public Long getAssetCount() {
->>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
         return assetRepository.size();
     }
 
@@ -82,15 +68,12 @@ public class AssetService {
      */
     public BigDecimal getCurrentValueOfAllAssets() {
 
-<<<<<<< HEAD
         return assetRepository.currentValueOfAllAssets();
-=======
-        return assetRepository.valueOfAllAssets();
     }
 
     public void save(AssetSummary request) {
+        System.out.println("this was called");
         assetRepository.save(new Asset(request.getCost(),request.getDepreciationRate(),request.getPurchaseDate(),request.getTitle()));
->>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
     }
 
 }
