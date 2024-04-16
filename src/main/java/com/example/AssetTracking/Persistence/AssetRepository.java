@@ -1,6 +1,10 @@
 package com.example.AssetTracking.Persistence;
 
+import com.example.AssetTracking.Data.AssetSummary;
 import com.example.AssetTracking.Domain.Asset;
+import jakarta.persistence.criteria.Predicate;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,6 +17,33 @@ import java.util.Collection;
 
 @Repository
 public interface AssetRepository extends CrudRepository<Asset,Long>, JpaSpecificationExecutor<Asset> {
+
+    /*
+    @Query(value = "FROM Asset ORDER BY purchase_date")
+    public Collection<Asset> findAll();
+
+     */
+
+    /*
+    default Collection<Asset> findAll(){
+        Collection<Asset> assets=findAll();
+
+        Sort DEFAULT_SORT=Sort.by("purchase_date");
+
+        Specification<Asset> specification=((root, query, criteriaBuilder) -> criteriaBuilder.);
+        //Specification<Asset> specification=((root, query, builder) -> (Predicate) builder.asc(root.get("purchase_date")));
+    }
+     */
+
+    /*
+    public Collection<Asset> getSortedAll(){
+        Sort sort = Sort.by(Sort.Direction.DESC, "yourProperty");
+
+        return findAll();
+    }
+
+     */
+
 
     default Long size(){
         final Iterable<Asset> ids=findAll();

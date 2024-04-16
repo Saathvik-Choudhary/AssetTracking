@@ -1,6 +1,7 @@
 package com.example.AssetTracking.Core;
 
 import com.example.AssetTracking.Data.AssetSummary;
+import com.example.AssetTracking.Data.GetAllAssetSummaryResponse;
 import com.example.AssetTracking.Data.GetAllAssetsResponse;
 import com.example.AssetTracking.Domain.Asset;
 import com.example.AssetTracking.Persistence.AssetRepository;
@@ -16,19 +17,22 @@ public class AssetService {
     AssetRepository assetRepository;
 
     public GetAllAssetsResponse getAllAssets(){
-        final var assests=assetRepository.findAll();
+        final var assets=assetRepository.findAll();
 
         GetAllAssetsResponse response=new GetAllAssetsResponse();
 
-        for(var asset:assests){
-            response.addAsset(new AssetSummary( asset.getCost(),asset.getDepreciationRate(),asset.getPurchaseDate(),asset.getTitle()));
+        for(var asset:assets){
+            response.addAsset(new AssetSummary( asset.getTitle(),asset.getCost(),asset.getPurchaseDate(),asset.getDepreciationRate()));
         }
 
         return response;
     }
 
+    public GetAllAssetSummaryResponse getAssetSummary(){
+        return(new GetAllAssetSummaryResponse(getAssetCount(),getCostOfAllAssets(),getValueOfAssets()));
+    }
 
-    public Long GetAssetCount() {
+    public Long getAssetCount() {
         return assetRepository.size();
     }
 

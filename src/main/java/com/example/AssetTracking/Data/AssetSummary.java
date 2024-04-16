@@ -15,10 +15,10 @@ public class AssetSummary {
 
     private final String title;
 
-    public AssetSummary(BigDecimal cost
-            , BigDecimal depreciationRate
-            , LocalDate purchaseDate
-            , String title) {
+    public AssetSummary(String title,
+                        BigDecimal cost,
+                        LocalDate purchaseDate,BigDecimal depreciationRate
+            ) {
         this.cost = cost;
         this.depreciationRate = depreciationRate;
         this.purchaseDate = purchaseDate;
