@@ -7,6 +7,9 @@ import org.hibernate.annotations.GenerationTime;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Base class for entity models.
+ */
 @MappedSuperclass
 public abstract class Model implements Serializable {
 
@@ -19,7 +22,12 @@ public abstract class Model implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Long getId(){
+    /**
+     * Gets the unique identifier of the entity.
+     *
+     * @return The unique identifier.
+     */
+    public Long getId() {
         return id;
     }
 }

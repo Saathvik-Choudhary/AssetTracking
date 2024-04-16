@@ -8,35 +8,62 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+/**
+ * Business operation on assets.
+ */
 @Service
 public class AssetService {
 
     @Autowired
     AssetRepository assetRepository;
 
-    public GetAllAssetsResponse getAllAssests(){
-        final var assests=assetRepository.findAll();
+    /**
+     * Get all assets saved in the tracker.
+     *
+     * @return all the assets.
+     */
+    public GetAllAssetsResponse getAllAssets() {
+        final var assets = assetRepository.findAll();
 
-        GetAllAssetsResponse response=new GetAllAssetsResponse();
+        GetAllAssetsResponse response = new GetAllAssetsResponse();
 
-        for(var asset:assests){
-            response.addAsset(new AssetSummary( asset.getCost(),asset.getDepreciationRate(),asset.getPurchaseDate(),asset.getTitle()));
+        for (var asset : assets) {
+            response.addAsset(new AssetSummary(asset.getCost()
+                    , asset.getDepreciationRate()
+                    , asset.getPurchaseDate()
+                    , asset.getTitle()));
         }
 
         return response;
     }
 
 
+    /**
+     * Get the total number of assets saved in tracker.
+     *
+     * @return The count of tracker.
+     */
     public Long GetAssetCount() {
         return assetRepository.size();
     }
 
-    public BigDecimal getCostOfAllAssets(){
+    /**
+     * Get the total cost of the assets.
+     *
+     * @return The total cost of the assets.
+     */
+    public BigDecimal getCostOfAllAssets() {
         return assetRepository.costOfAllAssets();
     }
 
-    public BigDecimal getValueOfAssets(){
+    /**
+     * Get the current value of all the assets.
+     *
+     * @return The current value of all assets.
+     */
+    public BigDecimal getCurrentValueOfAllAssets() {
 
-        return assetRepository.valueOfAllAssests();
+        return assetRepository.currentValueOfAllAssets();
     }
+
 }
