@@ -24,11 +24,16 @@ public class AssetPopulator implements CommandLineRunner {
 
         LocalDate localDate = LocalDate.now();
 
+<<<<<<< HEAD
         for (int i = 1; i <= 100; i++) {
             assetRepository.save(new Asset(BigDecimal.valueOf(i)
                     , BigDecimal.valueOf(i)
                     , localDate
                     , "title" + i));
+=======
+        for(int i=1;i<=2;i++) {
+            assetRepository.save(new Asset(BigDecimal.valueOf(i), BigDecimal.valueOf(i), localDate, "title"+i));
+>>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
         }
     }
 

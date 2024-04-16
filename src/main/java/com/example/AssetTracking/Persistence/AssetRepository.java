@@ -1,6 +1,10 @@
 package com.example.AssetTracking.Persistence;
 
+import com.example.AssetTracking.Data.AssetSummary;
 import com.example.AssetTracking.Domain.Asset;
+import jakarta.persistence.criteria.Predicate;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -15,6 +19,7 @@ import java.time.Period;
 @Repository
 public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecificationExecutor<Asset> {
 
+<<<<<<< HEAD
     /**
      * Calculate the size of asset collection.
      *
@@ -24,6 +29,40 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
         final Iterable<Asset> ids = findAll();
         Long sum = 0L;
         for (var id : ids) {
+=======
+    /*
+    @Query(value = "FROM Asset ORDER BY purchase_date")
+    public Collection<Asset> findAll();
+
+     */
+
+    /*
+    default Collection<Asset> findAll(){
+        Collection<Asset> assets=findAll();
+
+        Sort DEFAULT_SORT=Sort.by("purchase_date");
+
+        Specification<Asset> specification=((root, query, criteriaBuilder) -> criteriaBuilder.);
+        //Specification<Asset> specification=((root, query, builder) -> (Predicate) builder.asc(root.get("purchase_date")));
+    }
+     */
+
+    /*
+    public Collection<Asset> getSortedAll(){
+        Sort sort = Sort.by(Sort.Direction.DESC, "yourProperty");
+
+        return findAll();
+    }
+
+     */
+
+
+    default Long size(){
+        final Iterable<Asset> ids=findAll();
+        Long sum= 0L;
+        for(var id : ids)
+        {
+>>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
             sum++;
         }
         return (sum);
@@ -43,6 +82,7 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
         return (sum);
     }
 
+<<<<<<< HEAD
     /**
      * Calculates the current value of all assets, considering depreciation.
      *
@@ -50,6 +90,10 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
      */
     default BigDecimal currentValueOfAllAssets() {
         final Iterable<Asset> ids = findAll();
+=======
+    default BigDecimal valueOfAllAssets(){
+        final Iterable<Asset> ids=findAll();
+>>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
         BigDecimal sum = BigDecimal.valueOf(0);
         for (var id : ids) {
             sum = sum.add(depreciatedValue(id));

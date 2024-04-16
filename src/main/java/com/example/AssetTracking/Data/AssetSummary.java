@@ -15,6 +15,7 @@ public class AssetSummary {
 
     private final String title;
 
+<<<<<<< HEAD
     /**
      * Constructs an AssetSummary object.
      *
@@ -27,6 +28,12 @@ public class AssetSummary {
             , BigDecimal depreciationRate
             , LocalDate purchaseDate
             , String title) {
+=======
+    public AssetSummary(String title,
+                        BigDecimal cost,
+                        LocalDate purchaseDate,BigDecimal depreciationRate
+            ) {
+>>>>>>> 4d9e2fe7ebfae5a4b49d8abf4092b2a327e810e6
         this.cost = cost;
         this.depreciationRate = depreciationRate;
         this.purchaseDate = purchaseDate;
