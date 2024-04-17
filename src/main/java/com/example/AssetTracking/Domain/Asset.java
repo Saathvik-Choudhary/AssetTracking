@@ -50,19 +50,20 @@ public class Asset extends Model {
     /**
      * Create an asset having specific attributes.
      *
+     * @param title            The title of the asset.
      * @param cost             The cost of the asset.
      * @param depreciationRate The depreciation Rate of the asset.
      * @param purchaseDate     The purchase date of the asset.
-     * @param title            The title of the asset.
      */
-    public Asset(BigDecimal cost
+    public Asset(String title
+            , BigDecimal cost
             , BigDecimal depreciationRate
-            , LocalDate purchaseDate
-            , String title) {
+            , LocalDate purchaseDate) {
+
+        setTitle(title);
         setCost(cost);
         setDepreciationRate(depreciationRate);
         setPurchaseDate(purchaseDate);
-        setTitle(title);
     }
 
     /**
