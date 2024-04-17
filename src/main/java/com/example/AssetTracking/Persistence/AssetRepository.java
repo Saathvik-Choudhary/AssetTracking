@@ -12,12 +12,25 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A collection of {@link Asset}s.
  */
 @Repository
 public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecificationExecutor<Asset> {
+
+    default List<Asset> getAll(){
+        final Iterable<Asset> ids = findAll();
+
+        List<Asset> assets=new ArrayList<>();
+        for(var id:ids){
+            assets.add(id);
+        }
+
+        return assets;
+    }
 
     /**
      * Calculate the size of asset collection.
