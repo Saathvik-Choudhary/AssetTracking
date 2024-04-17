@@ -8,8 +8,9 @@ import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
+import java.util.Collections;
 import java.math.BigDecimal;
+import java.util.*;
 import java.math.RoundingMode;
 
 /**
@@ -27,7 +28,12 @@ public class AssetService {
      * @return all the assets.
      */
     public GetAllAssetsResponse getAllAssets(){
-        final var assets=assetRepository.findAll();
+//        Collections<Asset> assets=new arrayList<>;
+//                assetRepository.findAll(); // Retrieve assets
+
+        List<Asset> assets = new ArrayList<>( assetRepository.getAll());
+
+        assets.sort(new AssetSortComparator());
 
 
         GetAllAssetsResponse response = new GetAllAssetsResponse();
