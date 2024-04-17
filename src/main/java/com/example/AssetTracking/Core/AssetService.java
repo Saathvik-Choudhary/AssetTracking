@@ -6,10 +6,12 @@ import com.example.AssetTracking.Data.GetAllAssetsResponse;
 import com.example.AssetTracking.Domain.Asset;
 import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.math.BigDecimal;
 import java.util.*;
+import java.math.RoundingMode;
 
 /**
  * Business operation on assets.
@@ -32,6 +34,7 @@ public class AssetService {
         List<Asset> assets = new ArrayList<>( assetRepository.getAll());
 
         assets.sort(new AssetSortComparator());
+
 
         GetAllAssetsResponse response = new GetAllAssetsResponse();
 
@@ -74,12 +77,15 @@ public class AssetService {
      */
     public BigDecimal getCurrentValueOfAllAssets() {
 
-        return assetRepository.currentValueOfAllAssets();
+        return assetRepository.currentValueOfAllAssets().setScale(2, RoundingMode.HALF_UP);
     }
 
     public void save(AssetSummary request) {
         System.out.println("this was called");
-        assetRepository.save(new Asset(request.getCost(),request.getDepreciationRate(),request.getPurchaseDate(),request.getTitle()));
+        assetRepository.save(new Asset(request.getTitle()
+                , request.getCost()
+                , request.getDepreciationRate()
+                , request.getPurchaseDate()));
     }
 
 }
