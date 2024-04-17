@@ -73,7 +73,10 @@ public class AssetService {
 
     public void save(AssetSummary request) {
         System.out.println("this was called");
-        assetRepository.save(new Asset(request.getCost(),request.getDepreciationRate(),request.getPurchaseDate(),request.getTitle()));
+        assetRepository.save(new Asset(request.getTitle()
+                , request.getCost()
+                , request.getDepreciationRate()
+                , request.getPurchaseDate()));
     }
 
 }
