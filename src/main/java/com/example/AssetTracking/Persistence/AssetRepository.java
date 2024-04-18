@@ -7,13 +7,18 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A collection of {@link Asset}s.
  */
 @Repository
 public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecificationExecutor<Asset> {
-
 
     /**
      * Calculate the total cost of all assets.

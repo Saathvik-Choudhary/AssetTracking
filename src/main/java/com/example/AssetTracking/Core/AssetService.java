@@ -2,11 +2,13 @@ package com.example.AssetTracking.Core;
 
 import com.example.AssetTracking.Data.AssetSummary;
 import com.example.AssetTracking.Data.GetAllAssetSummaryResponse;
+import com.example.AssetTracking.Data.GetAllAssetsRequest;
 import com.example.AssetTracking.Data.GetAllAssetsResponse;
 import com.example.AssetTracking.Domain.Asset;
 import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -28,9 +30,10 @@ public class AssetService {
      *
      * @return all the assets.
      */
-    public GetAllAssetsResponse getAllAssets(){
+    public GetAllAssetsResponse getAllAssets( final GetAllAssetsRequest ){
 //        Collections<Asset> assets=new arrayList<>;
 //                assetRepository.findAll(); // Retrieve assets
+
 
         final var record = assetRepository.findAll();
 
@@ -39,6 +42,7 @@ public class AssetService {
         for(var asset:record) {
             assets.add(asset);
         }
+
 
         assets.sort(new AssetSortComparator());
 
