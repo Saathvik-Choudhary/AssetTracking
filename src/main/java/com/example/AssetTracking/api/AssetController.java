@@ -28,11 +28,11 @@ public class AssetController {
         System.out.println("put was called");
         assetService.save(request);
     }
+
     @CrossOrigin
     @GetMapping("/assetSummary")
     public ResponseEntity<GetAllAssetSummaryResponse> assetSummary(){
         return ResponseEntity.ok(assetService.getAssetSummary());
     }
-
 
 }
