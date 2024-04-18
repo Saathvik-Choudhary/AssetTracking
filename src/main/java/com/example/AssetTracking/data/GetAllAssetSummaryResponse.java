@@ -1,6 +1,4 @@
-package com.example.AssetTracking.Data;
-
-import com.fasterxml.jackson.databind.BeanProperty;
+package com.example.AssetTracking.data;
 
 import java.math.BigDecimal;
 

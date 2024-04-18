@@ -1,4 +1,4 @@
-package com.example.AssetTracking.Data;
+package com.example.AssetTracking.data;
 
 public class GetAllAssetSummaryRequest {
 }

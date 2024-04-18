@@ -1,6 +1,4 @@
-package Common;
-
-import org.springframework.util.StringUtils;
+package common;
 
 /**
  * Utility class for string operation.

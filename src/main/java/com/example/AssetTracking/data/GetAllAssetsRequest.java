@@ -1,6 +1,6 @@
-package com.example.AssetTracking.Data;
+package com.example.AssetTracking.data;
 
-import Common.PaginatedRequest;
+import common.PaginatedRequest;
 
 import java.math.BigDecimal;
 import java.util.Date;

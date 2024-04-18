@@ -1,13 +1,14 @@
-package com.example.AssetTracking.Domain;
+package com.example.AssetTracking.domain;
 
-import Common.Model;
-import Common.StringUtil;
+import common.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import static common.StringUtil.*;
 
 /**
  * Create an asset.
@@ -127,7 +128,7 @@ public class Asset extends Model {
     }
 
     public void setTitle(final String title) {
-        if (StringUtil.isBlank(title)) {
+        if (isBlank(title)) {
             throw new NullPointerException("The asset title can not be blank");
         }
         this.title = title;

@@ -1,9 +1,9 @@
-package com.example.AssetTracking.Api;
+package com.example.AssetTracking.api;
 
-import com.example.AssetTracking.Core.AssetService;
-import com.example.AssetTracking.Data.AssetSummary;
-import com.example.AssetTracking.Data.GetAllAssetSummaryResponse;
-import com.example.AssetTracking.Data.GetAllAssetsResponse;
+import com.example.AssetTracking.core.AssetService;
+import com.example.AssetTracking.data.AssetSummary;
+import com.example.AssetTracking.data.GetAllAssetSummaryResponse;
+import com.example.AssetTracking.data.GetAllAssetsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

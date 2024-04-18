@@ -1,4 +1,4 @@
-package com.example.AssetTracking.Data;
+package com.example.AssetTracking.data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

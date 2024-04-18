@@ -1,6 +1,6 @@
-package com.example.AssetTracking.Persistence;
+package com.example.AssetTracking.persistence;
 
-import com.example.AssetTracking.Domain.Asset;
+import com.example.AssetTracking.domain.Asset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Repository;
