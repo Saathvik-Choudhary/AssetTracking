@@ -15,7 +15,13 @@ public class AssetSummary {
 
     private final String title;
 
-    /**
+    private final Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    /**R
      * Constructs an AssetSummary object.
      *
      * @param cost The cost of the asset.
@@ -26,11 +32,13 @@ public class AssetSummary {
     public AssetSummary(BigDecimal cost
             , BigDecimal depreciationRate
             , LocalDate purchaseDate
-            , String title) {
+            , String title
+            ,Long id) {
         this.cost = cost;
         this.depreciationRate = depreciationRate;
         this.purchaseDate = purchaseDate;
         this.title = title;
+        this.id=id;
     }
 
     /**

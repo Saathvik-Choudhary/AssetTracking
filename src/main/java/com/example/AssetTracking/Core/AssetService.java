@@ -42,7 +42,8 @@ public class AssetService {
             response.addAsset(new AssetSummary(asset.getCost()
                     , asset.getDepreciationRate()
                     , asset.getPurchaseDate()
-                    , asset.getTitle()));
+                    , asset.getTitle()
+                    , asset.getId()));
         }
 
         return response;
