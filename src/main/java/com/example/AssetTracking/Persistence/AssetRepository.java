@@ -1,10 +1,6 @@
 package com.example.AssetTracking.Persistence;
 
-import com.example.AssetTracking.Data.AssetSummary;
 import com.example.AssetTracking.Domain.Asset;
-import jakarta.persistence.criteria.Predicate;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -16,8 +12,6 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Collection;
-
 
 /**
  * A collection of {@link Asset}s.
@@ -25,7 +19,7 @@ import java.util.Collection;
 @Repository
 public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecificationExecutor<Asset> {
 
-    default List<Asset> getAll(){
+    default List<Asset> getAllAssets(){
         final Iterable<Asset> ids = findAll();
 
         List<Asset> assets=new ArrayList<>();

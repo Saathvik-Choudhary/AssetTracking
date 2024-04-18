@@ -2,13 +2,13 @@ package com.example.AssetTracking.Core;
 
 import com.example.AssetTracking.Data.AssetSummary;
 import com.example.AssetTracking.Data.GetAllAssetSummaryResponse;
+import com.example.AssetTracking.Data.GetAllAssetsRequest;
 import com.example.AssetTracking.Data.GetAllAssetsResponse;
 import com.example.AssetTracking.Domain.Asset;
 import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import java.util.Collections;
+
 import java.math.BigDecimal;
 import java.util.*;
 import java.math.RoundingMode;
@@ -27,11 +27,11 @@ public class AssetService {
      *
      * @return all the assets.
      */
-    public GetAllAssetsResponse getAllAssets(){
+    public GetAllAssetsResponse getAllAssets( final GetAllAssetsRequest ){
 //        Collections<Asset> assets=new arrayList<>;
 //                assetRepository.findAll(); // Retrieve assets
 
-        List<Asset> assets = new ArrayList<>( assetRepository.getAll());
+        List<Asset> assets = new ArrayList<>( assetRepository.getAllAssets());
 
         assets.sort(new AssetSortComparator());
 
@@ -59,7 +59,7 @@ public class AssetService {
      * @return The count of tracker.
      */
     public Long getAssetCount() {
-        return assetRepository.size();
+        return assetRepository.count();
     }
 
     /**
