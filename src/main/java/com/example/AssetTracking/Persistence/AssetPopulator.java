@@ -23,8 +23,10 @@ public class AssetPopulator implements CommandLineRunner {
      */
     public void populateAssets() {
         LocalDate purchaseDate = LocalDate.now().minusYears(1);
+        Random random = new Random();
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 10; i++) {
+            purchaseDate = purchaseDate.minusDays(random.nextInt(10));
             assetRepository.save(new Asset("title" + i,
                     BigDecimal.valueOf(i),
                     BigDecimal.valueOf(10),
