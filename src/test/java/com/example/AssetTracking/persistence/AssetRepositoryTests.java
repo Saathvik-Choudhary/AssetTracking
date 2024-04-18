@@ -55,13 +55,14 @@ public class AssetRepositoryTests {
         asset2.setPurchaseDate(LocalDate.now().minusYears(4));
 
         when(mockAssetRepository.findAll()).thenReturn(Arrays.asList(asset1,asset2));
-        mockAssetRepository.saveAll(Arrays.asList(asset1,asset2));
+        mockAssetRepository.save(asset1);
+        mockAssetRepository.save(asset2);
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
     public void testSize(){
-        long size = mockAssetRepository.size();
+        long size = mockAssetRepository.count();
         assertEquals(2,size);
     }
 

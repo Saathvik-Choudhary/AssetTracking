@@ -25,7 +25,6 @@ public class AssetController {
     @CrossOrigin
     @PostMapping("/save")
     public void save(@RequestBody AssetSummary request){
-        System.out.println("put was called");
         assetService.save(request);
     }
     @CrossOrigin

@@ -30,7 +30,7 @@ public class AssetService {
      *
      * @return all the assets.
      */
-    public GetAllAssetsResponse getAllAssets( final GetAllAssetsRequest ){
+    public GetAllAssetsResponse getAllAssets(){
 //        Collections<Asset> assets=new arrayList<>;
 //                assetRepository.findAll(); // Retrieve assets
 
@@ -97,8 +97,9 @@ public class AssetService {
         return sum.setScale(2,RoundingMode.HALF_UP);
     }
 
+
+
     public void save(AssetSummary request) {
-        System.out.println("this was called");
         assetRepository.save(new Asset(request.getTitle()
                 , request.getCost()
                 , request.getDepreciationRate()

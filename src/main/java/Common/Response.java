@@ -22,5 +22,5 @@ public class Response implements Serializable {
 //
 //            errors.add(error);
 //        }
-    }
+
 }

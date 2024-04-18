@@ -22,14 +22,22 @@ public class AssetPopulator implements CommandLineRunner {
      * Populate assets with sample data.
      */
     public void populateAssets() {
-        LocalDate purchaseDate = LocalDate.now().minusYears(1);
         Random random = new Random();
 
-        for (int i = 1; i <= 10; i++) {
-            purchaseDate = purchaseDate.minusDays(random.nextInt(10));
-            assetRepository.save(new Asset("title" + i,
-                    BigDecimal.valueOf(i),
-                    BigDecimal.valueOf(10),
+        // Sample titles and values for assets
+        String[] titles = {"Laptop", "Smartphone", "Camera", "Tablet", "Headphones", "Gaming Console", "Fitness Tracker", "Smartwatch", "Drone", "VR Headset"};
+        BigDecimal[] values = {BigDecimal.valueOf(1000), BigDecimal.valueOf(800), BigDecimal.valueOf(600), BigDecimal.valueOf(400), BigDecimal.valueOf(300), BigDecimal.valueOf(400), BigDecimal.valueOf(200), BigDecimal.valueOf(300), BigDecimal.valueOf(800), BigDecimal.valueOf(500)};
+
+        LocalDate startDate = LocalDate.of(2023, 1, 1); // Start date for purchases
+
+        for (int i = 0; i < titles.length; i++) {
+            // Generate random purchase date within the last year
+            LocalDate purchaseDate = startDate.minusDays(random.nextInt(365));
+
+            // Save asset with random title, value, and purchase date
+            assetRepository.save(new Asset(titles[i],
+                    values[i],
+                    BigDecimal.TEN, // Assuming a fixed maintenance cost of 10 for simplicity
                     purchaseDate
             ));
         }
