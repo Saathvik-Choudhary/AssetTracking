@@ -4,15 +4,9 @@ import com.example.AssetTracking.Core.AssetService;
 import com.example.AssetTracking.Data.AssetSummary;
 import com.example.AssetTracking.Data.GetAllAssetSummaryResponse;
 import com.example.AssetTracking.Data.GetAllAssetsResponse;
-import com.example.AssetTracking.Persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 
 @RestController
