@@ -1,8 +1,6 @@
-package Common;
+package common;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import java.io.Serial;
 import java.io.Serializable;

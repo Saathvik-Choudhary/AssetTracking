@@ -1,9 +1,8 @@
-package com.example.AssetTracking.Core;
+package com.example.AssetTracking.core;
 
-import com.example.AssetTracking.Domain.Asset;
+import com.example.AssetTracking.domain.Asset;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.Comparator;
 
 public class AssetSortComparator implements Comparator<Asset> {

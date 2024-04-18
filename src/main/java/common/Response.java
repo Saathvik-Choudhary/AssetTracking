@@ -1,8 +1,6 @@
-package Common;
+package common;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class Response implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -23,4 +21,4 @@ public class Response implements Serializable {
 //            errors.add(error);
 //        }
     }
-}
+

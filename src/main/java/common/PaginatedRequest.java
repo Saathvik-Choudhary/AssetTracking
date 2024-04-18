@@ -1,9 +1,9 @@
-package Common;
+package common;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
-public class PaginatedRequest extends Request{
+public abstract class PaginatedRequest extends Request{
     private static final long serialVersionUID = 1L;
     /**
      * The page number for pagination.

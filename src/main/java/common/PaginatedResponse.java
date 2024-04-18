@@ -1,4 +1,4 @@
-package Common;
+package common;
 
 /**
  * Response for retrieving a page of records.

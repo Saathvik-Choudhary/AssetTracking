@@ -1,17 +1,14 @@
-package com.example.AssetTracking.Persistence;
+package com.example.AssetTracking.persistence;
 
-import com.example.AssetTracking.Domain.Asset;
+import com.example.AssetTracking.domain.Asset;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.Period;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -27,4 +24,6 @@ public interface AssetRepository extends CrudRepository<Asset, Long>, JpaSpecifi
      */
     @Query("SELECT SUM(cost) FROM Asset")
     BigDecimal costOfAllAssets();
+
+    Page<Asset> findAll(Pageable pageable);
 }
