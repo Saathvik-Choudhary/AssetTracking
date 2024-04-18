@@ -11,6 +11,8 @@ public class AssetSummary {
 
     private final BigDecimal depreciationRate;
 
+    private final BigDecimal depreciatedValue;
+
     private final LocalDate purchaseDate;
 
     private final String title;
@@ -30,12 +32,13 @@ public class AssetSummary {
      * @param title The title of the asset.
      */
     public AssetSummary(BigDecimal cost
-            , BigDecimal depreciationRate
+            , BigDecimal depreciationRate, BigDecimal depreciatedValue
             , LocalDate purchaseDate
             , String title
-            ,Long id) {
+            , Long id) {
         this.cost = cost;
         this.depreciationRate = depreciationRate;
+        this.depreciatedValue = depreciatedValue;
         this.purchaseDate = purchaseDate;
         this.title = title;
         this.id=id;
@@ -66,6 +69,15 @@ public class AssetSummary {
      */
     public LocalDate getPurchaseDate() {
         return purchaseDate;
+    }
+
+    /**
+     * Get the depreciated value of the asset.
+     *
+     * @return The depreciated value of the asset.
+     */
+    public BigDecimal getDepreciatedValue() {
+        return depreciatedValue;
     }
 
     /**
