@@ -1,20 +1,17 @@
 package com.example.AssetTracking.data;
 
+import com.example.AssetTracking.data.AssetSummary;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Create a response containing a collection of asset summaries.
  */
 public class GetAllAssetsResponse {
     private Collection<AssetSummary> record;
-
-    public GetAllAssetsResponse(List<AssetSummary> assetSummaries) {
-    }
 
     /**
      * Adds an asset summary to the response.

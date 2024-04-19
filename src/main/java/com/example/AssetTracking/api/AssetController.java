@@ -1,9 +1,7 @@
 package com.example.AssetTracking.api;
 
 import com.example.AssetTracking.core.AssetService;
-import com.example.AssetTracking.data.AssetSummary;
-import com.example.AssetTracking.data.GetAllAssetSummaryResponse;
-import com.example.AssetTracking.data.GetAllAssetsResponse;
+import com.example.AssetTracking.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +22,9 @@ public class AssetController {
 
     @CrossOrigin
     @PostMapping("/save")
-    public void save(@RequestBody AssetSummary request){
+    public SaveAssetResponse save(@RequestBody SaveAssetRequest request){
         System.out.println("put was called");
-        assetService.save(request);
+        return assetService.save(request);
     }
 
     @CrossOrigin
