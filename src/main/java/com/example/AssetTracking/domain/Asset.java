@@ -3,8 +3,10 @@ package com.example.AssetTracking.domain;
 import common.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.hibernate.annotations.Generated;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,10 +18,19 @@ import static common.StringUtil.*;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "asset")
-public class Asset extends Model {
+public class Asset implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @Column(name = "id", updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+
+    public Long getId() {
+        return id;
+    }
 
     @Column(name = "cost")
     @NotNull(message = "The Title of asset can not be blank")

@@ -1,8 +1,6 @@
 package com.example.AssetTracking.core;
 
-import com.example.AssetTracking.data.AssetSummary;
-import com.example.AssetTracking.data.GetAllAssetSummaryResponse;
-import com.example.AssetTracking.data.GetAllAssetsResponse;
+import com.example.AssetTracking.data.*;
 import com.example.AssetTracking.domain.Asset;
 import com.example.AssetTracking.persistence.AssetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,24 +38,57 @@ public class AssetService {
         final LocalDate purchaseDate = asset.getPurchaseDate();
         final LocalDate currentDate = LocalDate.now();
 
-        rate = rate.divide(BigDecimal.valueOf(12), 2);
+        // Handle division by zero
+        if (rate.compareTo(BigDecimal.ZERO) == 0) {
+            return BigDecimal.ZERO;
+        }
 
+        // Adjust scale for rounding
+        rate = rate.divide(BigDecimal.valueOf(12), 4, RoundingMode.HALF_UP);
+
+        // Calculate period
         Period period = Period.between(purchaseDate, currentDate);
-
         final int years = period.getYears();
         final int months = period.getMonths();
 
+        // Calculate time in months
         final int time = years * 12 + months;
 
-        return cost.multiply((BigDecimal.valueOf(1).subtract(rate.divide(BigDecimal.valueOf(100), 2))).pow(time));
+        // Calculate depreciated value
+        BigDecimal ratePercentage = rate.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP);
+        BigDecimal depreciationFactor = BigDecimal.ONE.subtract(ratePercentage);
+        BigDecimal depreciatedValue = depreciationFactor.pow(time).multiply(cost);
 
+        return depreciatedValue.setScale(2, RoundingMode.HALF_UP);
     }
+
 
     /**
      * Get all assets saved in the tracker.
      *
      * @return all the assets.
      */
+    public GetAllAssetsResponse getAllAssets(){
+
+        List<Asset> assets=assetRepository.findAll();;
+
+        assets.sort(new AssetSortComparator());
+
+
+        GetAllAssetsResponse response = new GetAllAssetsResponse();
+
+        for (var asset : assets) {
+            response.addAsset(new AssetSummary(asset.getCost()
+                    , asset.getDepreciationRate()
+                    , depreciatedValue(asset).setScale(2,RoundingMode.HALF_UP)
+                    , asset.getPurchaseDate()
+                    , asset.getTitle()
+                    , asset.getId()));
+        }
+
+        return response;
+    }
+    /*
     public GetAllAssetsResponse getAllAssets() {
         int page = 1;
         int pageSize = 20;
@@ -78,6 +109,7 @@ public class AssetService {
 
         return new GetAllAssetsResponse(assetSummaries);
     }
+     */
 
     public GetAllAssetSummaryResponse getAssetSummary() {
         return new GetAllAssetSummaryResponse(
@@ -105,13 +137,18 @@ public class AssetService {
         return assetRepository.costOfAllAssets();
     }
 
+    public BigDecimal getCurrentValueOfAllAssets() {
+        final var assets = assetRepository.findAll();
+
+        return  CurrentValueOfAllAssets(assets);
+    }
     /**
      * Get the current value of all the assets.
      *
      * @return The current value of all assets.
      */
-    public BigDecimal getCurrentValueOfAllAssets() {
-        final var assets = assetRepository.findAll();
+     BigDecimal CurrentValueOfAllAssets(final List<Asset> assets) {
+
         BigDecimal sum = BigDecimal.valueOf(0);
         for (var asset : assets) {
             sum = sum.add(depreciatedValue(asset));
@@ -124,23 +161,46 @@ public class AssetService {
      *
      * @param request The asset summary request containing details of the asset to be saved.
      */
-    public void save(AssetSummary request) {
-        if (request == null) {
-            throw new IllegalArgumentException("Asset summary cannot be null");
-        }
-        if (request.getCost().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Cost must be greater than zero");
-        }
-        if (request.getDepreciationRate().compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Depreciation rate must be non-negative");
-        }
-        if (request.getPurchaseDate().isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Purchase date cannot be in the future");
-        }
+    public SaveAssetResponse save(SaveAssetRequest request) {
 
-        assetRepository.save(new Asset(request.getTitle(),
-                request.getCost(),
-                request.getDepreciationRate(),
-                request.getPurchaseDate()));
+        int errorcount=0;
+
+        String[] response = new String[4];
+        if(request==null)
+        {
+            response[0] = "Asset request cannot be null";
+            errorcount++;
+        }
+        if (request.getTitle() == null) {
+            response[0] = "Asset title cannot be null";
+            errorcount++;
+        }
+        else response[0] = "";
+        if (request.getCost().compareTo(BigDecimal.ZERO) <= 0) {
+            response[1] = "Cost must be greater than zero";
+            errorcount++;
+        } else if (request.getDepreciationRate().compareTo(BigDecimal.ZERO) < 0) {
+            response[1] = "Depreciation rate must be non-negative";
+            errorcount++;
+        }
+        else response[1] = "";
+        if (request.getPurchaseDate().isAfter(LocalDate.now())) {
+            response[2] = "Purchase date cannot be in the future";
+            errorcount++;
+        }
+        else response[2] = "";
+        if (request.getDepreciationRate() == null){
+            response[3] = "The depreciation rate of the asset cannot be null";
+            errorcount++;
+        }
+        response[3] = "";
+        if(errorcount==0) {
+            assetRepository.save(new Asset(request.getTitle(),
+                    request.getCost(),
+                    request.getDepreciationRate(),
+                    request.getPurchaseDate()));
+        }
+        return new SaveAssetResponse(response);
     }
+
 }
