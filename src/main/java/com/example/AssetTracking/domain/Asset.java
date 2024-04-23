@@ -9,6 +9,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Currency;
 
 import static common.StringUtil.*;
 
@@ -16,7 +17,7 @@ import static common.StringUtil.*;
  * Create an asset.
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "asset")
 public class Asset implements Serializable {
 
@@ -27,10 +28,6 @@ public class Asset implements Serializable {
     @Column(name = "id", updatable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-
-    public Long getId() {
-        return id;
-    }
 
     @Column(name = "cost")
     @NotNull(message = "The Title of asset can not be blank")
@@ -55,7 +52,7 @@ public class Asset implements Serializable {
     /**
      * Hidden to prevent instantiation.
      */
-    public Asset() {
+    private Asset() {
         super();
     }
 
@@ -94,6 +91,15 @@ public class Asset implements Serializable {
      */
     public BigDecimal getDepreciationRate() {
         return depreciationRate;
+    }
+
+    /**
+     * Get the id of the asset
+     *
+     * @return The id of the asset
+     */
+    public Long getId() {
+        return id;
     }
 
     /**

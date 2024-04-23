@@ -26,6 +26,11 @@ public class AssetService {
     @Autowired
     AssetRepository assetRepository;
 
+
+    public GetAllCurrenciesResponse getAllCurrencies(GetAllCurrenciesRequest request){
+        return new GetAllCurrenciesResponse();
+    }
+
     /**
      * Calculates the depreciated value of an asset.
      *
@@ -44,20 +49,23 @@ public class AssetService {
         }
 
         // Adjust scale for rounding
-        rate = rate.divide(BigDecimal.valueOf(12), 4, RoundingMode.HALF_UP);
+        rate = rate.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP);
 
         // Calculate period
         Period period = Period.between(purchaseDate, currentDate);
         final int years = period.getYears();
         final int months = period.getMonths();
 
-        // Calculate time in months
-        final int time = years * 12 + months;
-
         // Calculate depreciated value
-        BigDecimal ratePercentage = rate.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP);
-        BigDecimal depreciationFactor = BigDecimal.ONE.subtract(ratePercentage);
-        BigDecimal depreciatedValue = depreciationFactor.pow(time).multiply(cost);
+        BigDecimal depreciationFactor = BigDecimal.ONE.subtract(rate);
+
+        BigDecimal depreciatedValue = cost;
+
+        for(int i=0;i<years;i++)
+        {
+            depreciatedValue = (depreciationFactor.multiply(depreciatedValue));
+        }
+
 
         return depreciatedValue.setScale(2, RoundingMode.HALF_UP);
     }
@@ -111,7 +119,7 @@ public class AssetService {
     }
      */
 
-    public GetAllAssetSummaryResponse getAssetSummary() {
+    public GetAllAssetSummaryResponse getAssetSummary(GetAllAssetSummaryRequest request) {
         return new GetAllAssetSummaryResponse(
                 getAssetCount(),
                 getCostOfAllAssets(),
@@ -194,12 +202,16 @@ public class AssetService {
             errorcount++;
         }
         response[3] = "";
+
+        InputCurrency currency= InputCurrency.valueOf(request.getCurrency());
+
         if(errorcount==0) {
             assetRepository.save(new Asset(request.getTitle(),
-                    request.getCost(),
+                    request.getCost().divide( BigDecimal.valueOf(currency.getConversionToUSD()),2,RoundingMode.HALF_UP),
                     request.getDepreciationRate(),
                     request.getPurchaseDate()));
         }
+
         return new SaveAssetResponse(response);
     }
 

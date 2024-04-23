@@ -6,6 +6,12 @@ import java.time.LocalDate;
 public class SaveAssetRequest {
     private final BigDecimal cost;
 
+    private final String currency;
+
+    public String getCurrency() {
+        return currency;
+    }
+
     private final BigDecimal depreciationRate;
 
     private final LocalDate purchaseDate;
@@ -21,11 +27,12 @@ public class SaveAssetRequest {
      * @param title The title of the asset.
      */
     public SaveAssetRequest(String title,
-                            BigDecimal cost,
+                            BigDecimal cost, String currency,
                             BigDecimal depreciationRate,
                             LocalDate purchaseDate
             ) {
         this.cost = cost;
+        this.currency = currency;
         this.depreciationRate = depreciationRate;
         this.purchaseDate = purchaseDate;
         this.title = title;
